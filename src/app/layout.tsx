@@ -43,7 +43,7 @@ export default function RootLayout({
             
             <footer className="py-6 text-center text-sm  bg-black/60 backdrop-blur shadow-md">
               <p>© {new Date().getFullYear()} - Pokémon es una marca registrada de Nintendo</p>
-              <p className="mt-1">Creado con Next.js y PokeAPI</p>
+              <p className="mt- text-white">Creado con Next.js y PokeAPI</p>
             </footer>
           </div>
         </SoundProvider>
