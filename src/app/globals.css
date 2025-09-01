@@ -1,37 +1,58 @@
+/* globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "tailwindcss";
 
+/* ---- Variables de color y fuente ---- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --font-main: 'Press Start 2P', cursive; 
+  --background-color: #ffffff;
+  --foreground-color: #171717;
+  --font-main: 'Press Start 2P', cursive;
 }
 
-@layer base {
-  html {
-    font-family: var(--font-main); 
-  }
-}
-
+/* Modo oscuro: solo cambia los colores, NO el fondo */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: url('./img/background.png') no-repeat center center fixed;
-    --background-size: auto;
-    --foreground: #ededed;
+    --background-color: #0b0b0b;
+    --foreground-color: #ededed;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+/* ---- Base ---- */
+@layer base {
+  html, body, #__next {
+    height: 100%;
+  }
+  html {
+    font-family: var(--font-main);
+  }
 }
 
+/* ---- Fondo responsivo (para todos los usuarios) ---- */
+body {
+  /* Usa la imagen desde /public */
+  background-image: url('/img/background.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;        /* <- clave para que se adapte a cualquier pantalla */
+  background-attachment: fixed;  /* parallax suave en desktop */
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  min-height: 100%;
+}
+
+/* iOS/Android suelen tener bugs con background-attachment: fixed */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+/* Animación (tuya) */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-5px); }
   40%, 80% { transform: translateX(5px); }
 }
-
 .animate-shake {
   animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
