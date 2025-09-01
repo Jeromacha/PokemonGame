@@ -1,58 +1,43 @@
-/* globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "tailwindcss";
 
-/* ---- Variables de color y fuente ---- */
 :root {
-  --background-color: #ffffff;
+  --font-main: 'Press Start 2P', cursive; 
   --foreground-color: #171717;
-  --font-main: 'Press Start 2P', cursive;
 }
 
-/* Modo oscuro: solo cambia los colores, NO el fondo */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #0b0b0b;
-    --foreground-color: #ededed;
-  }
-}
-
-/* ---- Base ---- */
 @layer base {
   html, body, #__next {
     height: 100%;
   }
   html {
-    font-family: var(--font-main);
+    font-family: var(--font-main); 
   }
 }
 
-/* ---- Fondo responsivo (para todos los usuarios) ---- */
 body {
-  /* Usa la imagen desde /public */
-  background-image: url('/img/background.png');
+  background-image: url('./img/background.png'); /* tu ruta */
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;        /* <- clave para que se adapte a cualquier pantalla */
-  background-attachment: fixed;  /* parallax suave en desktop */
-  background-color: var(--background-color);
+  background-size: cover;        /* que se adapte a cualquier pantalla */
+  background-attachment: fixed;  /* parallax en desktop */
   color: var(--foreground-color);
   min-height: 100%;
 }
 
-/* iOS/Android suelen tener bugs con background-attachment: fixed */
+/* Evitar bugs en móviles con fixed */
 @media (max-width: 768px) {
   body {
     background-attachment: scroll;
   }
 }
 
-/* Animación (tuya) */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-5px); }
   40%, 80% { transform: translateX(5px); }
 }
+
 .animate-shake {
   animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
